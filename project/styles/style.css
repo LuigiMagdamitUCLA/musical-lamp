@@ -1,0 +1,45 @@
+body{
+    display:grid;
+    grid-template-columns: 1fr 1fr; /* this creates an even two column layout*/
+    grid-template-areas: "mappanel sidepanel controlpanel linkpanel" /* this creates one row with map panel on the left and sidepanel on the right */
+}
+
+#mapArea{
+    height:90vh;
+    grid-area: mappanel;
+} 
+
+#survey{
+    grid-area: sidepanel;
+} 
+
+#buttonrandom{
+    grid-area: controlpanel;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    height:200px;
+    width:200px;
+    position: relative;
+}
+
+#link1{
+    grid-area: linkpanel;
+    background-color: #6a42aa; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    height:200px;
+    width:200px;
+    position: relative;
+    white-space: normal;
+}
