@@ -5,7 +5,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(myMap);
 
 let dataExt;
-let url = "https://spreadsheets.google.com/feeds/list/1wKSyUz0z_iUbkwxHRME-shID4q9mNWqiKXjyl2w5lgs/oyn3kvk/public/values?alt=json"
+let url = "https://spreadsheets.google.com/feeds/list/1ZH2-pBKLWZEDFkV90ECcUX5HMw4P-8vpKjDxNs3wnMc/okrozsk/public/values?alt=json"
 fetch(url)
 	.then(response => {
 		return response.json();
@@ -26,30 +26,53 @@ var bruinIcon = L.icon({
     shadowAnchor: [4, 62],  // the same for the shadow
     popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 });
-function generatePost(year = 1, eth = "Filipino", score1 = 0, score2 = 0, story = "", misc = "") {
+function generatePost(id, prior, fear, supp, safe, story, place, eth, misc) {
     let html_element = `
-    <h2>Year: ${year} </h2>
-    <h3>Ethnicity: ${eth}</h3>
-    <h3>How would you rate your safety prior to COVID-19 era? ${score1}</h3>
-    <h3>How would you rate your safety after/during COVID-19 era? ${score2}</h3>
-    <h4>My Story</h4>
+    <h4>Do you identify as Asian American?: ${id} </h4>
+
+    <h4>Please describe how your race/ethnicity has influenced your level of fear of mistreatment prior to the COVID-19 pandemic, as well as after. Have these feelings changed, and how so?:</h4>
+    <p>${prior}</p>
+
+    <h4>How does your level of fear regarding hate crimes affect how you conduct your daily life, if it affects it at all?:</h4>
+    <p>${fear}</p>
+
+    <h4>Who would you consider to be within your support network (ex. a parent, a friend, a sibling, etc)?</h4>
+    <p>${supp}</p>
+
+    <h4>What would make you feel safer and more supported against racially motivated discrimination in your community?</h4>
+    <p>${safe}</p>
+
+    <h4>What’s your story? What message would you like to share with others in the Asian American community at this time? (ex. A message, a page, website or project to inspire and empower other Asian Americans.)</h4>
     <p>${story}</p>
 
-    <h4>Is there anything else you want to share?</h4>
+    <h4>Where were you living when you were experiencing these emotions during COVID-19?</h4>
+    <p>${place}</p>
+
+    <h4>Which ethnic category do you most identify with?</h4>
+    <p>${eth}</p>
+
+    <h4>Is there anything else you would like to share?</h4>
     <p>${misc}</p>
     `
     return html_element
 }
+
+
 function addMarker(data){
         //L.marker([data.lat,data.lng]).addTo(myMap).bindPopup(`<h2>${data.location}</h2>`)
         L.marker([data.lat,data.lng], {icon: bruinIcon}).addTo(myMap).bindPopup(
             generatePost(
-                year = data.year,
-                eth = data.eth,
-                score1 = data.score1,
-                score2 = data.score2,
-                story = data.story,
-                misc = data.misc
+                id = data["doyouself-identifyasasianamerican"],
+                prior = data["pleasedescribehowyourraceethnicityhasinfluencedyourleveloffearofmistreatmentpriortothecovid-19pandemicaswellasafter.havethesefeelingschangedandhowso"],
+                fear = data["howdoesyourleveloffearregardinghatecrimesaffecthowyouconductyourdailylifeifatall"],
+                supp = data["whowouldyouconsidertobewithinyoursupportnetworkex.aparentafriendasiblingetc"],
+                safe = data["whatwouldmakeyoufeelsaferandmoresupportedagainstraciallymotivateddiscriminationinyourcommunity"],
+                story = data["whatsyourstorywhatmessagewouldyouliketosharewithothersintheasianamericancommunityatthistimeex.amessageapagewebsiteorprojecttoinspireandempowerotherasianamericans."],
+                place = data["wherewereyoulivingwhenyouwereexperiencingtheseemotionsduringcovid-19"],
+                eth = data["whichethniccategorydoyoumostidentifywith"],
+                misc = data["isthereanythingelseyouwouldliketoshare"],
+
+
             )
         )
         return data.location   

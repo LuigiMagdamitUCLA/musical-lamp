@@ -5,7 +5,7 @@ body{
 }
 
 #mapArea{
-    height:90vh;
+    height:150vh;
     grid-area: mappanel;
 } 
 
