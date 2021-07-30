@@ -119,7 +119,7 @@ function getData(theData){
     
     randomPoint = (formattedData[Math.floor(Math.random()*formattedData.length)])
     console.log(randomPoint)
-    myMap.flyTo([randomPoint.lat, randomPoint.lng], zoom = 6)
+    myMap.flyTo([randomPoint.lat, randomPoint.lng], zoom = 10)
     myMap.openPopup([randomPoint.lat, randomPoint.lng])
 }
 function createButtons(lat,lng,title){
