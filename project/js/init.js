@@ -1,9 +1,11 @@
 const myMap = L.map('mapArea').setView([34.0709, -118.444], 5);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(myMap);
+var Stadia_AlidadeSmooth = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+	maxZoom: 20,
+	attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+});
 
+Stadia_AlidadeSmooth.addTo(myMap)
 let dataExt;
 let url = "https://spreadsheets.google.com/feeds/list/1ZH2-pBKLWZEDFkV90ECcUX5HMw4P-8vpKjDxNs3wnMc/okrozsk/public/values?alt=json"
 fetch(url)
@@ -15,16 +17,44 @@ fetch(url)
         processData(data)
     })
 
+let doyoufeelcomfortable = L.featureGroup();
+let doyounot = L.featureGroup();
+
+
+let circleOptions = {
+    radius: 10,
+    fillColor: "purple",
+    color: "pink",
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.8
+  }
+  function addMarker(data){
+    if(data.doyoufeelcomfortablesharingyourstory== "Yes"){
+      circleOptions.fillColor = "purple"
+        doyoufeelcomfortablesharingyourstory.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>Yes</h2>`))
+        createButtons(data.lat,data.lng,data.location)
+    }
+    else{
+      circleOptions.fillColor = "red"
+        doyounot.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>English is not the first language</h2>`))
+        createButtons(data.lat,data.lng,data.location)    
+    }
+    
+    return data.timestamp
+}
+
+
 let markers = []
 var bruinIcon = L.icon({
-    iconUrl: 'https://cdn.freebiesupply.com/logos/large/2x/ucla-bruins-1-logo-png-transparent.png',
+    iconUrl: 'https://i.pinimg.com/originals/71/c8/06/71c806428f9d8c76f8dd491ee177382c.png',
     shadowUrl: 'leaf-shadow.png',
 
     iconSize:     [30, 30], // size of the icon
     shadowSize:   [0, 0], // size of the shadow
-    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+    iconAnchor:   [19, 46],//changed marker icon positionpond to marker's location
     shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+    popupAnchor:  [0, -36] // point from which the popup should open relative to the iconAnchor
 });
 function generatePost(id, prior, fear, supp, safe, story, place, eth, misc) {
     let html_element = `
@@ -57,24 +87,48 @@ function generatePost(id, prior, fear, supp, safe, story, place, eth, misc) {
     return html_element
 }
 
-
+markers = []
 function addMarker(data){
         //L.marker([data.lat,data.lng]).addTo(myMap).bindPopup(`<h2>${data.location}</h2>`)
-        L.marker([data.lat,data.lng], {icon: bruinIcon}).addTo(myMap).bindPopup(
-            generatePost(
-                id = data["doyouself-identifyasasianamerican"],
-                prior = data["pleasedescribehowyourraceethnicityhasinfluencedyourleveloffearofmistreatmentpriortothecovid-19pandemicaswellasafter.havethesefeelingschangedandhowso"],
-                fear = data["howdoesyourleveloffearregardinghatecrimesaffecthowyouconductyourdailylifeifatall"],
-                supp = data["whowouldyouconsidertobewithinyoursupportnetworkex.aparentafriendasiblingetc"],
-                safe = data["whatwouldmakeyoufeelsaferandmoresupportedagainstraciallymotivateddiscriminationinyourcommunity"],
-                story = data["whatsyourstorywhatmessagewouldyouliketosharewithothersintheasianamericancommunityatthistimeex.amessageapagewebsiteorprojecttoinspireandempowerotherasianamericans."],
-                place = data["wherewereyoulivingwhenyouwereexperiencingtheseemotionsduringcovid-19"],
-                eth = data["whichethniccategorydoyoumostidentifywith"],
-                misc = data["isthereanythingelseyouwouldliketoshare"],
+        // L.marker([data.lat,data.lng], {icon: bruinIcon}).addTo(myMap).bindPopup(
+        //     generatePost(
+        //         id = data["doyouself-identifyasasianamerican"],
+        //         prior = data["pleasedescribehowyourraceethnicityhasinfluencedyourleveloffearofmistreatmentpriortothecovid-19pandemicaswellasafter.havethesefeelingschangedandhowso"],
+        //         fear = data["howdoesyourleveloffearregardinghatecrimesaffecthowyouconductyourdailylifeifatall"],
+        //         supp = data["whowouldyouconsidertobewithinyoursupportnetworkex.aparentafriendasiblingetc"],
+        //         safe = data["whatwouldmakeyoufeelsaferandmoresupportedagainstraciallymotivateddiscriminationinyourcommunity"],
+        //         story = data["whatsyourstorywhatmessagewouldyouliketosharewithothersintheasianamericancommunityatthistimeex.amessageapagewebsiteorprojecttoinspireandempowerotherasianamericans."],
+        //         place = data["wherewereyoulivingwhenyouwereexperiencingtheseemotionsduringcovid-19"],
+        //         eth = data["whichethniccategorydoyoumostidentifywith"],
+        //         misc = data["isthereanythingelseyouwouldliketoshare"],
 
 
-            )
+        //     ),
+        //     maxHeight = 50
+        // )
+        content = generatePost(
+                    id = data["doyouself-identifyasasianamerican"],
+                    prior = data["pleasedescribehowyourraceethnicityhasinfluencedyourleveloffearofmistreatmentpriortothecovid-19pandemicaswellasafter.havethesefeelingschangedandhowso"],
+                    fear = data["howdoesyourleveloffearregardinghatecrimesaffecthowyouconductyourdailylifeifatall"],
+                    supp = data["whowouldyouconsidertobewithinyoursupportnetworkex.aparentafriendasiblingetc"],
+                    safe = data["whatwouldmakeyoufeelsaferandmoresupportedagainstraciallymotivateddiscriminationinyourcommunity"],
+                    story = data["whatsyourstorywhatmessagewouldyouliketosharewithothersintheasianamericancommunityatthistimeex.amessageapagewebsiteorprojecttoinspireandempowerotherasianamericans."],
+                    place = data["wherewereyoulivingwhenyouwereexperiencingtheseemotionsduringcovid-19"],
+                    eth = data["whichethniccategorydoyoumostidentifywith"],
+                    misc = data["isthereanythingelseyouwouldliketoshare"],
+    
+                )
+        var popup = L.popup(
+            {
+                maxHeight: 500
+            }
         )
+            .setLatLng([data.lat, data.lng])
+            .setContent(content)
+            .openOn(myMap);
+        var marker = L.marker([data.lat,data.lng], {icon: bruinIcon})
+        marker.addTo(myMap).bindPopup(popup)
+        markers.push(marker)
         return data.location   
 }
 
@@ -99,6 +153,14 @@ function processData(theData){
     // we can actually add functions here too
     formattedData.forEach(addMarker)
     dataExt = "haha"
+    doyoufeelcomfortable.addTo(myMap)
+    doyounot.addTo(myMap)
+    let layers = {
+        "Do you feel comfortable sharing your story": doyoufeelcomfortable
+    }
+    L.control.layers(null,layers).addTo(myMap)
+    let allLayers = L.featureGroup([doyoufeelcomfortable,doyounot]);
+    myMap.fitBounds(allLayers.getBounds());
 }
 function getData(theData){
     const formattedData = [] /* this array will eventually be populated with the contents of the spreadsheet's rows */
@@ -144,7 +206,7 @@ function createLinkButton() {
     })
     document.body.appendChild(newButton);
 }
-createButtons(0, 0, "Click to see a random story!")
+//createButtons(0, 0, "Click to see a random story!")
 
 function getRandomStory() {
     fetch(url)
@@ -158,5 +220,5 @@ function getRandomStory() {
     })
     
 }
-console.log(dataExt)
-createLinkButton()
+console.log(markers)
+//createLinkButton()

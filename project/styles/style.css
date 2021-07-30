@@ -1,20 +1,29 @@
 body{
     display:grid;
-    grid-template-columns: 1fr 1fr; /* this creates an even two column layout*/
-    grid-template-areas: "mappanel sidepanel controlpanel linkpanel" /* this creates one row with map panel on the left and sidepanel on the right */
+    grid-template-columns: fit-content(8ch) fit-content(8ch) 1fr; /* this creates an even two column layout*/
+    grid-template-areas: 
+            "b b a"
+            "b b c"
+            "b b c";
 }
 
 #mapArea{
-    height:150vh;
-    grid-area: mappanel;
+    height:100vh;
+    width:150vh;
+    grid-area: b;
+    border:2px solid black;
 } 
 
 #survey{
     grid-area: sidepanel;
 } 
-
+.info {
+    text-overflow: hidden;
+    word-wrap: break-word;
+    border:2px solid black;
+}
 #buttonrandom{
-    grid-area: controlpanel;
+    grid-area: a;
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -29,12 +38,12 @@ body{
 }
 
 #link1{
-    grid-area: linkpanel;
+    border:2px solid black;
+    grid-area: a;
     background-color: #6a42aa; /* Green */
     border: none;
     color: white;
-    padding: 15px 32px;
-    text-align: center;
+    padding-bottom: 20px;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
@@ -42,4 +51,5 @@ body{
     width:200px;
     position: relative;
     white-space: normal;
+    padding-bottom: 25px;
 }
