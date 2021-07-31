@@ -12,11 +12,8 @@
     display:grid;
     grid-template-columns: fit-content(8ch) fit-content(8ch) 1fr; /* this creates an even two column layout*/
     grid-template-areas: 
-            "b b c"
-            "b b c"
-            "b b c"
-            "d d d"
-            "e e e";
+           "a a a"
+           "b b b";
 }
 #authors {
 
