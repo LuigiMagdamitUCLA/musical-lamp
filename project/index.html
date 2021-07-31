@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;500&display=swap" rel="stylesheet">
         <link rel="shortcut icon" href="#">
         <link rel="stylesheet" href="styles/style.css">
         
@@ -16,28 +16,61 @@
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     </head>
     
-    <body>
+    <body style = "background-color: rgb(22, 22, 22)">
+        <div id = "upper">
+
+        
         <div id="mapArea"></div>
         <div id="survey">
         <!-- this is the iframe for our survey -->
         </div>
         <div id = "info">
-            <h1 style="font-family: 'Roboto', sans-serif; font-size: 30px; text-align: center;">
+            <h1 id = "title"; style="font-family: 'Poppins', sans-serif; font-size: 30px; text-align: center;">
                 Tracing Asian American Discrimination in the UCLA Community
             </h1>
-            <h1 style="font-family: 'Roboto', sans-serif; font-size: 15px; text-align: center;">
-                Abita Ventakesh & Luigi Magdamit, UCLA ASIAN-AM 191S
+            <div id = second>
+                <h1 id = "authors" style="font-family: 'Roboto', sans-serif; font-size: 15px; text-align: center;">
+                    Abita Ventakesh & Luigi Magdamit, UCLA ASIAN-AM 191S
+                </h1>
+    
+                <p id = "desc" style="font-family: 'Poppins', sans-serif; font-size: 12px; text-align: center; width: 10;">
+                    Our project aims to listen to and document perceptions of hate and “otherness” among populations of Asian Americans within the UCLA community. We also hope to collect stories and trace changes in general feelings of fear experienced in the daily lives of Asian Americans within the same population. We hope to create a website with a map that marks locations of the Asian American community at UCLA to provide a sense of community in a geographic way. Each marker will include the narrative of the individual participant, alongside base demographic data such as ethnicity. We hope to create a user base whereby participants can self-report feelings of anxiety and fear. By handing this off to various on-campus Asian American-based organizations at UCLA,  the community in discussion may be able to trace their feelings of fear due to racial profiling retroactively before, during, and after the COVID-19 pandemic to highlight any key significant differences., especially since such news is not heavily reported on mainstream outlets in day-to-day life.
+                </p>
+            </div>
+            <div id = "third">
+                <h1 id = "title2" style="font-family: 'Poppins', sans-serif; font-size: 20px; text-align: center;">
+                    Mapping Community Reponse
+                </h1>
+                <p id = "desc2" style="font-family: 'Poppins', sans-serif; font-size: 12px; text-align: center; width: 10;">
+                    Each of the markers observed on the map are provided by real people that identify as Asian-American within the UCLA Community. Click on a point to read their responses. If you would like to be more involved with organizations involved AAPI organizations on and off campus, we have resources below this map that you can visit.
+                </p>
+                <p id = "desc2" style="font-family: 'Poppins', sans-serif; font-size: 12px; text-align: center; width: 10;">
+                    If you would like to take our survey and have your have your story represented on this map, please take the survey, linked below!
+                </p>
+            </div>
+        </div>
+            
+        </div>
+        <div id = "lower">
+
+        </div>
+        <div id = "bottom" style="grid-area: d">
+            <h1 style = "font-family: 'Poppins', sans-serif; font-size: 30px; text-align: center; color: whitesmoke;">
+                Links For Involvement and survey
             </h1>
 
-            <p style="font-family: 'Calibri', sans-serif; font-size: 15px; text-align: center; width: 10;">
-                Our project aims to listen to and document perceptions of hate and “otherness” among populations of Asian Americans within the UCLA community. We also hope to collect stories and trace changes in general feelings of fear experienced in the daily lives of Asian Americans within the same population. We hope to create a website with a map that marks locations of the Asian American community at UCLA to provide a sense of community in a geographic way. Each marker will include the narrative of the individual participant, alongside base demographic data such as ethnicity. We hope to create a user base whereby participants can self-report feelings of anxiety and fear. By handing this off to various on-campus Asian American-based organizations at UCLA,  the community in discussion may be able to trace their feelings of fear due to racial profiling retroactively before, during, and after the COVID-19 pandemic to highlight any key significant differences., especially since such news is not heavily reported on mainstream outlets in day-to-day life.
-            </p>
-            <a id = "link1" href="#"><button>Link 1</button></a>
             <a id = "link1" href="#"><button>Link 2</button></a>
             <a id = "link1" href="#"><button>Link 3</button></a>
             <a id = "link1" href="#"><button>Link 4</button></a>
+
+            <h1 style = "font-family: 'Poppins', sans-serif; font-size: 30px; text-align: center; color: whitesmoke;">
+                Words From the Community
+            </h1>
         </div>
-        
+        <div id = "contents">
+
+        </div>
+
         <script src="js/init.js"></script>
     </body>
 </html>

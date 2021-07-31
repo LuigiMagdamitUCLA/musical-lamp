@@ -1,19 +1,66 @@
-body{
+#upper{
     display:grid;
     grid-template-columns: fit-content(8ch) fit-content(8ch) 1fr; /* this creates an even two column layout*/
     grid-template-areas: 
-            "b b a"
             "b b c"
-            "b b c";
+            "b b c"
+            "b b c"
+            "d d d"
+            "e e e";
+}
+#lower{
+    display:grid;
+    grid-template-columns: fit-content(8ch) fit-content(8ch) 1fr; /* this creates an even two column layout*/
+    grid-template-areas: 
+            "b b c"
+            "b b c"
+            "b b c"
+            "d d d"
+            "e e e";
+}
+#authors {
+
+    color: whitesmoke;
+    padding-top: 50px;
+}
+#desc{
+
+    color: whitesmoke;
+    padding-bottom: 50px;
+}
+#second {
+    background-color: rgb(31, 31, 31);
+}
+#third {
+    background-color: rgb(22, 22, 22);
 }
 
+h4 {
+    font-family: 'Poppins'
+    
+}
+#title2, #desc2{
+    color: whitesmoke;
+    padding-top: 20px;
+
+    padding-left: 60px;
+    padding-right: 60px;
+}
 #mapArea{
     height:100vh;
     width:150vh;
     grid-area: b;
     border:2px solid black;
 } 
-
+#title {
+    background-color: rgb(22, 22, 22);
+    color: rgba(238, 238, 238, 0.993);
+}
+#desc {
+    padding-left: 60px;
+    padding-right: 60px;
+    
+}
 #survey{
     grid-area: sidepanel;
 } 
@@ -37,19 +84,18 @@ body{
     position: relative;
 }
 
-#link1{
-    border:2px solid black;
-    grid-area: a;
-    background-color: #6a42aa; /* Green */
-    border: none;
-    color: white;
-    padding-bottom: 20px;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    height:200px;
-    width:200px;
-    position: relative;
-    white-space: normal;
-    padding-bottom: 25px;
+
+
+
+
+#contents{
+    grid-area: d;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: white;
+}
+#contents h4 {
+    padding-top: 100px;
+    padding-left: 20px;
+    font-size: 10px;
 }

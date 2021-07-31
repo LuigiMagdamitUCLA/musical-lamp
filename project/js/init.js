@@ -1,27 +1,28 @@
-const myMap = L.map('mapArea').setView([34.0709, -118.444], 5);
-
+const myMap = L.map('mapArea').setView([34.0709, -118.444], 8);
 var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	subdomains: 'abcd',
 	maxZoom: 19
 });
-
-CartoDB_DarkMatter.addTo(myMap)
-let dataExt;
 let url = "https://spreadsheets.google.com/feeds/list/1ZH2-pBKLWZEDFkV90ECcUX5HMw4P-8vpKjDxNs3wnMc/okrozsk/public/values?alt=json"
+var markers = []
+// INIT VARIABELS HERE================================================
+CartoDB_DarkMatter.addTo(myMap)
+var obj;
 fetch(url)
 	.then(response => {
 		return response.json();
 		})
     .then(data =>{
-        console.log(data)
+
         processData(data)
+        obj = data
     })
+    
+// INIT FUNCTIONS HERE===============================================
 
 let doyoufeelcomfortable = L.featureGroup();
 let doyounot = L.featureGroup();
-
-
 let circleOptions = {
     radius: 10,
     fillColor: "purple",
@@ -30,23 +31,6 @@ let circleOptions = {
     opacity: 1,
     fillOpacity: 0.8
   }
-  function addMarker(data){
-    if(data.doyoufeelcomfortablesharingyourstory== "Yes"){
-      circleOptions.fillColor = "purple"
-        doyoufeelcomfortablesharingyourstory.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>Yes</h2>`))
-        createButtons(data.lat,data.lng,data.location)
-    }
-    else{
-      circleOptions.fillColor = "red"
-        doyounot.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>English is not the first language</h2>`))
-        createButtons(data.lat,data.lng,data.location)    
-    }
-    
-    return data.timestamp
-}
-
-
-let markers = []
 var bruinIcon = L.icon({
     iconUrl: 'https://i.pinimg.com/originals/71/c8/06/71c806428f9d8c76f8dd491ee177382c.png',
     shadowUrl: 'leaf-shadow.png',
@@ -57,7 +41,34 @@ var bruinIcon = L.icon({
     shadowAnchor: [4, 62],  // the same for the shadow
     popupAnchor:  [0, -36] // point from which the popup should open relative to the iconAnchor
 });
+
+
+// FUNCTIONS ======================================================================
+function addMarker(data){
+    if(data.doyoufeelcomfortablesharingyourstory== "Yes"){
+      circleOptions.fillColor = "purple"
+        doyoufeelcomfortablesharingyourstory.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>Yes</h2>`))
+        createButtons(data.lat,data.lng,data.location)
+    }
+    else{
+      circleOptions.fillColor = "red"
+        doyounot.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>English is not the first language</h2>`))
+        createButtons(data.lat,data.lng,data.location)    
+    }
+    return data.timestamp
+}
+
 function generatePost(id, prior, fear, supp, safe, story, place, eth, misc) {
+    
+    for(var i = 0; i < arguments.length; i++){
+        if(arguments[i] == ""){
+
+            arguments[i] = "No response given by survey taker"
+
+        }
+
+    }
+
     let html_element = `
     <h4>Do you identify as Asian American?: ${id} </h4>
 
@@ -87,26 +98,7 @@ function generatePost(id, prior, fear, supp, safe, story, place, eth, misc) {
     `
     return html_element
 }
-
-markers = []
 function addMarker(data){
-        //L.marker([data.lat,data.lng]).addTo(myMap).bindPopup(`<h2>${data.location}</h2>`)
-        // L.marker([data.lat,data.lng], {icon: bruinIcon}).addTo(myMap).bindPopup(
-        //     generatePost(
-        //         id = data["doyouself-identifyasasianamerican"],
-        //         prior = data["pleasedescribehowyourraceethnicityhasinfluencedyourleveloffearofmistreatmentpriortothecovid-19pandemicaswellasafter.havethesefeelingschangedandhowso"],
-        //         fear = data["howdoesyourleveloffearregardinghatecrimesaffecthowyouconductyourdailylifeifatall"],
-        //         supp = data["whowouldyouconsidertobewithinyoursupportnetworkex.aparentafriendasiblingetc"],
-        //         safe = data["whatwouldmakeyoufeelsaferandmoresupportedagainstraciallymotivateddiscriminationinyourcommunity"],
-        //         story = data["whatsyourstorywhatmessagewouldyouliketosharewithothersintheasianamericancommunityatthistimeex.amessageapagewebsiteorprojecttoinspireandempowerotherasianamericans."],
-        //         place = data["wherewereyoulivingwhenyouwereexperiencingtheseemotionsduringcovid-19"],
-        //         eth = data["whichethniccategorydoyoumostidentifywith"],
-        //         misc = data["isthereanythingelseyouwouldliketoshare"],
-
-
-        //     ),
-        //     maxHeight = 50
-        // )
         content = generatePost(
                     id = data["doyouself-identifyasasianamerican"],
                     prior = data["pleasedescribehowyourraceethnicityhasinfluencedyourleveloffearofmistreatmentpriortothecovid-19pandemicaswellasafter.havethesefeelingschangedandhowso"],
@@ -117,7 +109,6 @@ function addMarker(data){
                     place = data["wherewereyoulivingwhenyouwereexperiencingtheseemotionsduringcovid-19"],
                     eth = data["whichethniccategorydoyoumostidentifywith"],
                     misc = data["isthereanythingelseyouwouldliketoshare"],
-    
                 )
         var popup = L.popup(
             {
@@ -128,12 +119,14 @@ function addMarker(data){
             .setContent(content)
             .openOn(myMap);
         var marker = L.marker([data.lat,data.lng], {icon: bruinIcon})
-        marker.addTo(myMap).bindPopup(popup)
         markers.push(marker)
+        marker.addTo(myMap).bindPopup(popup)
+        
+
+        //createButtons(data.lat,data.lng,data["wherewereyoulivingwhenyouwereexperiencingtheseemotionsduringcovid-19"])
+        createStories(data.lat, data.lng, data["whatsyourstorywhatmessagewouldyouliketosharewithothersintheasianamericancommunityatthistimeex.amessageapagewebsiteorprojecttoinspireandempowerotherasianamericans."])
         return data.location   
 }
-
-extData = null
 function processData(theData){
     const formattedData = [] /* this array will eventually be populated with the contents of the spreadsheet's rows */
     const rows = theData.feed.entry // this is the weird Google Sheet API format we will be removing
@@ -150,10 +143,9 @@ function processData(theData){
       formattedData.push(formattedRow)
     }
     // lets see what the data looks like when its clean!
-    console.log(formattedData)
+
     // we can actually add functions here too
     formattedData.forEach(addMarker)
-    dataExt = "haha"
     doyoufeelcomfortable.addTo(myMap)
     doyounot.addTo(myMap)
     let layers = {
@@ -181,14 +173,15 @@ function getData(theData){
     // lets see what the data looks like when its clean!
     
     randomPoint = (formattedData[Math.floor(Math.random()*formattedData.length)])
-    console.log(randomPoint)
+
     myMap.flyTo([randomPoint.lat, randomPoint.lng], zoom = 10)
     myMap.openPopup([randomPoint.lat, randomPoint.lng])
 }
-function createButtons(lat,lng,title){
+function createButtons2(lat,lng,title){
     const newButton = document.createElement("button"); // adds a new button
     newButton.id = "buttonrandom"; // gives the button a unique id
     newButton.innerHTML = title; // gives the button a title
+ 
     newButton.setAttribute("lat",lat); // sets the latitude 
     newButton.setAttribute("lng",lng); // sets the longitude 
     newButton.addEventListener('click', function(){
@@ -209,17 +202,31 @@ function createLinkButton() {
 }
 //createButtons(0, 0, "Click to see a random story!")
 
-function getRandomStory() {
-    fetch(url)
-	.then(response => {
-		return response.json();
-		})
-    .then(data =>{
-        console.log(data)
-        processData(data)
-        getData(data)
-    })
-    
-}
-console.log(markers)
+
+
 //createLinkButton()
+
+function createButtons(lat,lng,title){
+    const newButton = document.createElement("button"); // adds a new button
+    newButton.id = "buttonsmenu"; // gives the button a unique id
+    newButton.innerHTML = title; // gives the button a title
+    newButton.setAttribute("lat",lat); // sets the latitude 
+    newButton.setAttribute("lng",lng); // sets the longitude 
+    newButton.addEventListener('click', function(){
+        myMap.flyTo([lat,lng], zoom = 10); //this is the flyTo from Leaflet
+        myMap.openPopup([lat, lng])
+    })
+    const spaceForButtons = document.getElementById('contents')
+    spaceForButtons.appendChild(newButton);//this adds the button to our page.
+}
+function createStories(lat,lng,title){
+    const newButton = document.createElement("h4"); // adds a new button
+    newButton.id = "buttonsmenu"; // gives the button a unique id
+    newButton.innerHTML = title; // gives the button a title
+    const spaceForButtons = document.getElementById('contents')
+    spaceForButtons.appendChild(newButton);//this adds the button to our page.
+}
+console.log(markers[1])
+for(var i = 0; i < markers.length; i++) {
+    console.log(markers[i])
+}
