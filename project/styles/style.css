@@ -14,22 +14,26 @@
     grid-template-areas: 
            "a a a"
            "b b b";
+    
 }
 #authors {
-
-    color: whitesmoke;
+    color: rgb(0, 0, 0);
     padding-top: 50px;
+}
+#title {
+   
+    color: rgba(36, 34, 34, 0.993);
 }
 #desc{
 
-    color: whitesmoke;
+    color: rgb(0, 0, 0);
     padding-bottom: 50px;
 }
 #second {
-    background-color: rgb(31, 31, 31);
+    /* background-color: rgb(248, 242, 191); */
 }
 #third {
-    background-color: rgb(22, 22, 22);
+    /* background-color: rgb(248, 242, 191); */
 }
 
 h4 {
@@ -37,8 +41,8 @@ h4 {
     
 }
 #title2, #desc2{
-    color: whitesmoke;
-    padding-top: 20px;
+    color: rgb(12, 11, 11);
+    padding-top: 5px;
 
     padding-left: 60px;
     padding-right: 60px;
@@ -48,11 +52,9 @@ h4 {
     width:150vh;
     grid-area: b;
     border:2px solid black;
+    z-index: 1;
 } 
-#title {
-    background-color: rgb(22, 22, 22);
-    color: rgba(238, 238, 238, 0.993);
-}
+
 #desc {
     padding-left: 60px;
     padding-right: 60px;
@@ -82,6 +84,78 @@ h4 {
 }
 
 
+.modal {
+    display:inherit; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 200; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(124, 92, 92); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #d7d0ff;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    height: 30%;
+    width: 100%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #d3dbdd;
+  color: rgb(11, 3, 58);
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 2px 16px;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 5000;
+    
+}
+
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #d7dfff;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
 
 
 
@@ -89,10 +163,19 @@ h4 {
     grid-area: d;
     display:grid;
     grid-template-columns: repeat(2, 1fr);
-    background-color: white;
 }
 #contents h4 {
-    padding-top: 100px;
     padding-left: 20px;
     font-size: 10px;
+}
+
+#link1{
+    color: rgb(85, 76, 76);
+    font-family: "Poppins", "sans-serif";
+    text-align: center;
+    font-size: 25px;
+    padding-right: 20px;
+}
+#links{
+    text-align: center;
 }
