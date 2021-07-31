@@ -15,8 +15,27 @@
         <!-- Leaflet's JavaScript-->
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     </head>
+
+    <div id="myModal" class="modal">
+      
     
-    <body style = "background-color: rgb(22, 22, 22)">
+        <!-- Modal content -->
+        <div class="modal-content">
+          
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Tracing Asian American Discrimination at UCLA</h2>
+          </div>
+          <div class="modal-body">
+            <p>This website seeks to compile anonymous responses from UCLA students regarding their experience as an Asian American person at UCLA. The goal of this project is to create a safe, updated community where Bruins can learn stories, hear messages, and hear about potential resources for support from other Bruins.</p>
+            <p>If you wish to contribute your own marker, please take the survey linked by the button on the right!</p>
+          </div>
+        </div>
+      </div>
+        </div>
+            
+    
+    <body style = "background-image: linear-gradient(to bottom right, rgb(153, 204, 233), rgb(250, 242, 168));">
         <div id = "upper">
 
         
@@ -30,7 +49,7 @@
             </h1>
             <div id = second>
                 <h1 id = "authors" style="font-family: 'Roboto', sans-serif; font-size: 15px; text-align: center;">
-                    Abita Ventakesh & Luigi Magdamit, UCLA ASIAN-AM 191S
+                    Abita Ventakesh & Luigi Magdamit, UCLA ASIAN-AM 191A, Instructed by Albert Kochaphum
                 </h1>
     
                 <p id = "desc" style="font-family: 'Poppins', sans-serif; font-size: 12px; text-align: center; width: 10;">
@@ -55,16 +74,25 @@
 
         </div>
         <div id = "bottom">
-            <h1 style = "font-family: 'Poppins', sans-serif; font-size: 30px; text-align: center; color: whitesmoke;">
+            <h1 style = "font-family: 'Poppins', sans-serif; font-size: 30px; text-align: center; color: rgb(85, 76, 76);">
                 Links For Involvement and survey
             </h1>
-
-            <a id = "link1" href="#"><button>Link 2</button></a>
-            <a id = "link1" href="#"><button>Link 3</button></a>
-            <a id = "link1" href="#"><button>Link 4</button></a>
-
-            <h1 style = "font-family: 'Poppins', sans-serif; font-size: 30px; text-align: center; color: whitesmoke;">
-                Words From the
+            <div id = "links">
+                <a id = "link1" href="https://docs.google.com/forms/d/e/1FAIpQLSe5FGg9M_p6-jFedt0EwJ_p8lxqKMdNo8hOJsg7AgorKh0-Kg/viewform?usp=sf_link">Click here to take our survey</a>
+                <a id = "link1" href="http://www.aasc.ucla.edu/">UCLA Asian American Studies Center</a>
+                <a id = "link1" href="https://uclaapc.wixsite.com/home/">UCLA APC</a>
+            </div>
+            <div id="google_translate_element"></div>
+                
+            <script type="text/javascript">
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+            }
+            </script>
+             
+            <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+            <h1 style = "font-family: 'Poppins', sans-serif; font-size: 30px; text-align: center; color: rgb(85, 76, 76);">
+                Words From the Community
             </h1>
         </div>
         <div id = "contents">
