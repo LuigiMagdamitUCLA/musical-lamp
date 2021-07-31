@@ -1,13 +1,13 @@
 const myMap = L.map('mapArea').setView([34.0709, -118.444], 8);
-var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-	subdomains: 'abcd',
-	maxZoom: 19
+let Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+	maxZoom: 16
 });
+Esri_WorldGrayCanvas.addTo(myMap);
 let url = "https://spreadsheets.google.com/feeds/list/1ZH2-pBKLWZEDFkV90ECcUX5HMw4P-8vpKjDxNs3wnMc/okrozsk/public/values?alt=json"
 var markers = []
 // INIT VARIABELS HERE================================================
-CartoDB_DarkMatter.addTo(myMap)
+
 var obj;
 fetch(url)
 	.then(response => {
@@ -21,8 +21,7 @@ fetch(url)
     
 // INIT FUNCTIONS HERE===============================================
 
-let doyoufeelcomfortable = L.featureGroup();
-let doyounot = L.featureGroup();
+
 let circleOptions = {
     radius: 10,
     fillColor: "purple",
@@ -30,6 +29,27 @@ let circleOptions = {
     weight: 2,
     opacity: 1,
     fillOpacity: 0.8
+  }
+  let modal = document.getElementById("myModal");
+
+  // Get the <span> element that closes the modal
+  let span = document.getElementsByClassName("close")[0];
+  
+  
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  let btn = document.getElementById("myBtn");
+  btn.onclick = function() {
+    modal.style.display = "block";
   }
 var bruinIcon = L.icon({
     iconUrl: 'https://i.pinimg.com/originals/71/c8/06/71c806428f9d8c76f8dd491ee177382c.png',
@@ -44,19 +64,7 @@ var bruinIcon = L.icon({
 
 
 // FUNCTIONS ======================================================================
-function addMarker(data){
-    if(data.doyoufeelcomfortablesharingyourstory== "Yes"){
-      circleOptions.fillColor = "purple"
-        doyoufeelcomfortablesharingyourstory.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>Yes</h2>`))
-        createButtons(data.lat,data.lng,data.location)
-    }
-    else{
-      circleOptions.fillColor = "red"
-        doyounot.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>English is not the first language</h2>`))
-        createButtons(data.lat,data.lng,data.location)    
-    }
-    return data.timestamp
-}
+
 
 function generatePost(id, prior, fear, supp, safe, story, place, eth, misc) {
     
@@ -118,7 +126,7 @@ function addMarker(data){
             .setLatLng([data.lat, data.lng])
             .setContent(content)
             .openOn(myMap);
-        var marker = L.marker([data.lat,data.lng], {icon: bruinIcon})
+        var marker = L.marker([data.lat,data.lng])
         markers.push(marker)
         marker.addTo(myMap).bindPopup(popup)
         
@@ -146,13 +154,9 @@ function processData(theData){
 
     // we can actually add functions here too
     formattedData.forEach(addMarker)
-    doyoufeelcomfortable.addTo(myMap)
-    doyounot.addTo(myMap)
-    let layers = {
-        "Do you feel comfortable sharing your story": doyoufeelcomfortable
-    }
+    
     L.control.layers(null,layers).addTo(myMap)
-    let allLayers = L.featureGroup([doyoufeelcomfortable,doyounot]);
+   
     myMap.fitBounds(allLayers.getBounds());
 }
 function getData(theData){
