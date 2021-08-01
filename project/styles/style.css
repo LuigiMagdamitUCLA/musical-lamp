@@ -1,20 +1,83 @@
-body{
+#upper{
     display:grid;
-    grid-template-columns: 1fr 1fr; /* this creates an even two column layout*/
-    grid-template-areas: "mappanel sidepanel controlpanel linkpanel" /* this creates one row with map panel on the left and sidepanel on the right */
+    grid-template-columns: fit-content(8ch) fit-content(8ch) 1fr; /* this creates an even two column layout*/
+    grid-template-areas: 
+            "b b c"
+            "b b c"
+            "b b c"
+            "d d d"
+            "e e e";
+}
+h1{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+#lower{
+    display:grid;
+    grid-template-columns: fit-content(8ch) fit-content(8ch) 1fr; /* this creates an even two column layout*/
+    grid-template-areas: 
+           "a a a"
+           "b b b";
+    
+}
+#authors {
+    color: rgb(0, 0, 0);
+}
+#title {
+   
+    color: rgba(36, 34, 34, 0.993);
+}
+#desc{
+
+    color: rgb(0, 0, 0);
+    padding-bottom: 50px;
+}
+#second {
+    background-color: rgb(248, 242, 191);
+    padding-left: 20px;
+    padding-right: 20px;
+    border: black 10px;
+}
+#third {
+    /* background-color: rgb(248, 242, 191); */
 }
 
+h4 {
+    font-family: 'Poppins'
+    
+}
+#title2, #desc2{
+    color: rgb(12, 11, 11);
+    padding-top: 5px;
+
+    padding-left: 60px;
+    padding-right: 60px;
+}
 #mapArea{
-    height:90vh;
-    grid-area: mappanel;
+    height:100vh;
+    width:120vh;
+    grid-area: b;
+    border:2px solid black;
+    z-index: 1;
 } 
 
+#desc {
+    padding-left: 60px;
+    padding-right: 60px;
+    
+}
 #survey{
     grid-area: sidepanel;
 } 
-
+.info {
+    text-overflow: hidden;
+    word-wrap: break-word;
+    border:2px solid black;
+}
 #buttonrandom{
-    grid-area: controlpanel;
+    grid-area: a;
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -28,18 +91,101 @@ body{
     position: relative;
 }
 
-#link1{
-    grid-area: linkpanel;
-    background-color: #6a42aa; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
+
+.modal {
+    display:inherit; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 200; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(124, 92, 92); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #d0f3fd;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    height: 30%;
+    width: 100%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: rgb(0, 0, 0);
     text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    height:200px;
-    width:200px;
-    position: relative;
-    white-space: normal;
+    cursor: pointer;
+  }
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #d3dbdd;
+  color: rgb(38, 37, 41);
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 2px 16px;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 5000;
+    
+}
+
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #dff2f5;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 300;
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
+
+
+
+#contents{
+    grid-area: d;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: rgba(183, 238, 111, 0.082);
+}
+#contents h4 {
+    padding-left: 20px;
+    font-size: 10px;
+}
+
+#link1{
+    color: rgb(85, 76, 76);
+    font-family: "Poppins", "sans-serif";
+    text-align: center;
+    font-size: 25px;
+    padding-right: 20px;
+}
+#links{
+    text-align: center;
 }
