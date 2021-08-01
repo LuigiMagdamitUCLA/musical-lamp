@@ -34,16 +34,16 @@
 
 ## Screenshots and Features
 -When you open the webpage, the user is able to see a brief description of the purpose of the webpage, and they are informed about the survey and opportunity to share their own marker on the map.
-![Example screenshot](./img/Screenshot(11).png)
+![Example screenshot](./Screenshot(11).png)
 
 -This webpage clearly displays the project objective at the forefront right underneath the title, and it also describes what each marker represents/the community response for clarity. As you click on each marker, survey responses are displayed clearly to the side for ease of reading.
-![Example screenshot](./img/Screenshot(12).png)
+![Example screenshot](./Screenshot(12).png)
 
 -There are also links to take the survey, to the Asian American Studies Center where students can access even more links to resources and research, and to APC displayed on the webpage, where students can learn more about student-specific events and news with associated organizations.
 
 -The website also offers language translation for ease of use.
 -The link that says “Click here to take the survey” leads you to the google form where you can fill out answers to add a marker to the map.
-![Example screenshot](./img/Screenshot(13).png)
+![Example screenshot](./Screenshot(13).png)
 
 
 <!-- If you have screenshots you'd like to share, include them here. -->
