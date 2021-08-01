@@ -107,7 +107,7 @@ h4 {
   
   /* Modal Content/Box */
   .modal-content {
-    background-color: #d7d0ff;
+    background-color: #d0f3fd;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
@@ -133,7 +133,7 @@ h4 {
 .modal-header {
   padding: 2px 16px;
   background-color: #d3dbdd;
-  color: rgb(11, 3, 58);
+  color: rgb(38, 37, 41);
 }
 
 /* Modal Body */
@@ -148,7 +148,7 @@ h4 {
 /* Modal Content */
 .modal-content {
   position: relative;
-  background-color: #d7dfff;
+  background-color: #dff2f5;
   margin: auto;
   padding: 0;
   border: 1px solid #888;
@@ -157,6 +157,7 @@ h4 {
   animation-name: animatetop;
   animation-duration: 0.4s;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 300;
 }
 
 /* Add Animation */

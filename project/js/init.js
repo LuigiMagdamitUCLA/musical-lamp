@@ -158,7 +158,14 @@ function addMarker(data){
         //marker.addTo(myMap).bindPopup(popup).on('click', function(e){changeDesc(populateContent(data))});
         m = marker.bindPopup(popup).on('click', function(e){changeDesc(populateContent(data))});
         //m.addTo(myMap)
-        markers.addLayer(m);
+
+        if(data.lat == 0 && data.lng == 0){
+          
+        }
+        else{
+          markers.addLayer(m);
+        }
+        
         //z.addLayer(marker.addTo(myMap).bindPopup(popup).on('click', function(e){changeDesc(populateContent(data))})
         
         
