@@ -14,6 +14,7 @@
 
         <!-- Leaflet's JavaScript-->
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
     </head>
 
     <div id="myModal" class="modal">
@@ -36,44 +37,26 @@
             
     
     <body style = "background-image: linear-gradient(to bottom right, rgb(153, 204, 233), rgb(250, 242, 168));">
-        <div id = "upper">
-
-        
-        <div id="mapArea"></div>
-        <div id="survey">
-        <!-- this is the iframe for our survey -->
-        </div>
-        <div id = "info">
-            <h1 id = "title"; style="font-family: 'Poppins', sans-serif; font-size: 30px; text-align: center;">
+        <div id = "header">
+            <h1 ; style="font-family: 'Poppins', sans-serif; font-size: 30px; text-align: center;">
                 Tracing Asian American Discrimination in the UCLA Community
             </h1>
-            <div id = second>
-                <h1 id = "authors" style="font-family: 'Roboto', sans-serif; font-size: 15px; text-align: center;">
-                    Abita Ventakesh & Luigi Magdamit, UCLA ASIAN-AM 191A, Instructed by Albert Kochaphum
-                </h1>
-    
-                <p id = "desc" style="font-family: 'Poppins', sans-serif; font-size: 12px; text-align: center; width: 10;">
-                    Our project aims to listen to and document perceptions of hate and “otherness” among populations of Asian Americans within the UCLA community. We also hope to collect stories and trace changes in general feelings of fear experienced in the daily lives of Asian Americans within the same population. We hope to create a website with a map that marks locations of the Asian American community at UCLA to provide a sense of community in a geographic way. Each marker will include the narrative of the individual participant, alongside base demographic data such as ethnicity. We hope to create a user base whereby participants can self-report feelings of anxiety and fear. By handing this off to various on-campus Asian American-based organizations at UCLA,  the community in discussion may be able to trace their feelings of fear due to racial profiling retroactively before, during, and after the COVID-19 pandemic to highlight any key significant differences., especially since such news is not heavily reported on mainstream outlets in day-to-day life.
-                </p>
-            </div>
-            <div id = "third">
-                <h1 id = "title2" style="font-family: 'Poppins', sans-serif; font-size: 20px; text-align: center;">
-                    Mapping Community Reponse
-                </h1>
-                <p id = "desc2" style="font-family: 'Poppins', sans-serif; font-size: 12px; text-align: center; width: 10;">
-                    Each of the markers observed on the map are provided by real people that identify as Asian-American within the UCLA Community. Click on a point to read their responses. If you would like to be more involved with organizations involved AAPI organizations on and off campus, we have resources below this map that you can visit.
-                </p>
-                <p id = "desc2" style="font-family: 'Poppins', sans-serif; font-size: 12px; text-align: center; width: 10;">
-                    If you would like to take our survey and have your have your story represented on this map, please take the survey, linked below!
-                </p>
-            </div>
-        </div>
-            
-        </div>
-        <div id = "lower">
+            <h1 ; style="font-family: 'Poppins', sans-serif; font-size: 20px; text-align: center;">
+                Abita Ventakesh & Luigi Magdamit, UCLA ASIAN-AM 191A, Instructed by Albert Kochaphum
+            </h1>
+            <h1 id = "desc" style="font-family: 'Poppins', sans-serif; font-size: 12px; text-align: center; width: 10;">
+                Our project aims to listen to and document perceptions of hate and “otherness” among populations of Asian Americans within the UCLA community. We also hope to collect stories and trace changes in general feelings of fear experienced in the daily lives of Asian Americans within the same population. We hope to create a website with a map that marks locations of the Asian American community at UCLA to provide a sense of community in a geographic way. Each marker will include the narrative of the individual participant, alongside base demographic data such as ethnicity. We hope to create a user base whereby participants can self-report feelings of anxiety and fear. By handing this off to various on-campus Asian American-based organizations at UCLA,  the community in discussion may be able to trace their feelings of fear due to racial profiling retroactively before, during, and after the COVID-19 pandemic to highlight any key significant differences., especially since such news is not heavily reported on mainstream outlets in day-to-day life.
+            </h1>
+            <h1 id = "title2" style="font-family: 'Poppins', sans-serif; font-size: 20px; text-align: center;">
+                Mapping Community Reponse
+            </h1>
+            <p id = "desc2" style="font-family: 'Poppins', sans-serif; font-size: 12px; text-align: center; width: 10;">
+                Each of the markers observed on the map are provided by real people that identify as Asian-American within the UCLA Community. Click on a point to read their responses. If you would like to be more involved with organizations involved AAPI organizations on and off campus, we have resources below this map that you can visit.
+            </p>
+            <p id = "desc2" style="font-family: 'Poppins', sans-serif; font-size: 12px; text-align: center; width: 10;">
+                If you would like to take our survey and have your have your story represented on this map, please take the survey, linked below!
+            </p>
 
-        </div>
-        <div id = "bottom">
             <h1 style = "font-family: 'Poppins', sans-serif; font-size: 30px; text-align: center; color: rgb(85, 76, 76);">
                 Links For Involvement and survey
             </h1>
@@ -83,6 +66,76 @@
                 <a id = "link1" href="https://uclaapc.wixsite.com/home/">UCLA APC</a>
             </div>
             <div id="google_translate_element"></div>
+        </div>
+        <div id = "upper">
+
+        
+        <div id="mapArea"></div>
+        <div id="survey">
+        <!-- this is the iframe for our survey -->
+        </div>
+        <div id = "info">
+            
+            <div id = second>
+                <h1 id = "title"; style="font-family: 'Poppins', sans-serif; font-size: 30px; text-align: center;">
+                    Click on a point!
+                </h1>
+                <h1 style="font-family: 'Roboto', sans-serif; font-size: 15px; text-align: center;">
+                    Please describe how your race/ethnicity has influenced your level of fear of mistreatment prior to the COVID-19 pandemic, as well as after. Have these feelings changed, and how so?:
+                </h1>
+                <h1 id = "authors" style="font-family: 'Roboto', sans-serif; font-size: 12px; text-align: center;">
+
+                </h1>
+
+                <h1 style="font-family: 'Roboto', sans-serif; font-size: 15px; text-align: center;">
+                    How does your level of fear regarding hate crimes affect how you conduct your daily life, if it affects it at all?:
+                </h1>
+                <h1 id = "affect" style="font-family: 'Roboto', sans-serif; font-size: 12px; text-align: center;">
+                </h1>
+
+                <h1 style="font-family: 'Roboto', sans-serif; font-size: 15px; text-align: center;">
+                    Who would you consider to be within your support network (ex. a parent, a friend, a sibling, etc)?
+                </h1>
+                <h1 id = "supp" style="font-family: 'Roboto', sans-serif; font-size: 12px; text-align: center;">
+                </h1>
+
+                <h1 style="font-family: 'Roboto', sans-serif; font-size: 15px; text-align: center;">
+                    What would make you feel safer and more supported against racially motivated discrimination in your community?
+                </h1>
+                <h1 id = "safe" style="font-family: 'Roboto', sans-serif; font-size: 12px; text-align: center;">
+                </h1>
+
+                <h1 style="font-family: 'Roboto', sans-serif; font-size: 15px; text-align: center;">
+                    What’s your story? What message would you like to share with others in the Asian American community at this time? (ex. A message, a page, website or project to inspire and empower other Asian Americans.)
+                </h1>
+                <h1 id = "story" style="font-family: 'Roboto', sans-serif; font-size: 12px; text-align: center;">
+                </h1>
+
+                <h1 style="font-family: 'Roboto', sans-serif; font-size: 15px; text-align: center;">
+                    Where were you living when you were experiencing these emotions during COVID-19?
+                </h1>
+                <h1 id = "place" style="font-family: 'Roboto', sans-serif; font-size: 12px; text-align: center;">
+                </h1>
+
+                <h1 style="font-family: 'Roboto', sans-serif; font-size: 15px; text-align: center;">
+                    Is there anything else you would like to share?
+                </h1>
+                <h1 id = "misc" style="font-family: 'Roboto', sans-serif; font-size: 12px; text-align: center;">
+                </h1>
+
+                
+            </div>
+            <div id = "third">
+                
+            </div>
+        </div>
+            
+        </div>
+        <div id = "lower">
+
+        </div>
+        <div id = "bottom">
+            
                 
             <script type="text/javascript">
             function googleTranslateElementInit() {
@@ -91,9 +144,7 @@
             </script>
              
             <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-            <h1 style = "font-family: 'Poppins', sans-serif; font-size: 30px; text-align: center; color: rgb(85, 76, 76);">
-                Words From the Community
-            </h1>
+
         </div>
         <div id = "contents">
 

@@ -6,6 +6,7 @@ let Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/r
 Esri_WorldGrayCanvas.addTo(myMap);
 let url = "https://spreadsheets.google.com/feeds/list/1ZH2-pBKLWZEDFkV90ECcUX5HMw4P-8vpKjDxNs3wnMc/okrozsk/public/values?alt=json"
 var markers = []
+
 // INIT VARIABELS HERE================================================
 
 var obj;
@@ -66,7 +67,7 @@ var bruinIcon = L.icon({
 // FUNCTIONS ======================================================================
 
 
-function generatePost(id, prior, fear, supp, safe, story, place, eth, misc) {
+function generatePost(content) {
     
     for(var i = 0; i < arguments.length; i++){
         if(arguments[i] == ""){
@@ -78,46 +79,70 @@ function generatePost(id, prior, fear, supp, safe, story, place, eth, misc) {
     }
 
     let html_element = `
-    <h4>Do you identify as Asian American?: ${id} </h4>
+    <h4>Do you identify as Asian American?: ${content.id} </h4>
 
     <h4>Please describe how your race/ethnicity has influenced your level of fear of mistreatment prior to the COVID-19 pandemic, as well as after. Have these feelings changed, and how so?:</h4>
-    <p>${prior}</p>
+    <p>${content.prior}</p>
 
     <h4>How does your level of fear regarding hate crimes affect how you conduct your daily life, if it affects it at all?:</h4>
-    <p>${fear}</p>
+    <p>${content.fear}</p>
 
     <h4>Who would you consider to be within your support network (ex. a parent, a friend, a sibling, etc)?</h4>
-    <p>${supp}</p>
+    <p>${content.supp}</p>
 
     <h4>What would make you feel safer and more supported against racially motivated discrimination in your community?</h4>
-    <p>${safe}</p>
+    <p>${content.safe}</p>
 
     <h4>What’s your story? What message would you like to share with others in the Asian American community at this time? (ex. A message, a page, website or project to inspire and empower other Asian Americans.)</h4>
-    <p>${story}</p>
+    <p>${content.story}</p>
 
     <h4>Where were you living when you were experiencing these emotions during COVID-19?</h4>
-    <p>${place}</p>
+    <p>${content.place}</p>
 
     <h4>Which ethnic category do you most identify with?</h4>
-    <p>${eth}</p>
+    <p>${content.eth}</p>
 
     <h4>Is there anything else you would like to share?</h4>
-    <p>${misc}</p>
+    <p>${content.misc}</p>
     `
     return html_element
 }
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+function populateContent(data){
+  contentParts = {
+    "id" : data["doyouself-identifyasasianamerican"],
+    "prior" : data["pleasedescribehowyourraceethnicityhasinfluencedyourleveloffearofmistreatmentpriortothecovid-19pandemicaswellasafter.havethesefeelingschangedandhowso"],
+    "fear" : data["howdoesyourleveloffearregardinghatecrimesaffecthowyouconductyourdailylifeifatall"],
+    "supp" : data["whowouldyouconsidertobewithinyoursupportnetworkex.aparentafriendasiblingetc"],
+    "safe" : data["whatwouldmakeyoufeelsaferandmoresupportedagainstraciallymotivateddiscriminationinyourcommunity"],
+    "story" : data["whatsyourstorywhatmessagewouldyouliketosharewithothersintheasianamericancommunityatthistimeex.amessageapagewebsiteorprojecttoinspireandempowerotherasianamericans."],
+    "place" : data["wherewereyoulivingwhenyouwereexperiencingtheseemotionsduringcovid-19"],
+    "eth" : data["whichethniccategorydoyoumostidentifywith"],
+    "misc" : data["isthereanythingelseyouwouldliketoshare"]
+  }
+  for(part in contentParts){
+    if(contentParts[part] == ""){
+      contentParts[part] == "No response was provided for this question."
+    }
+  }
+  return contentParts
+}
 function addMarker(data){
-        content = generatePost(
-                    id = data["doyouself-identifyasasianamerican"],
-                    prior = data["pleasedescribehowyourraceethnicityhasinfluencedyourleveloffearofmistreatmentpriortothecovid-19pandemicaswellasafter.havethesefeelingschangedandhowso"],
-                    fear = data["howdoesyourleveloffearregardinghatecrimesaffecthowyouconductyourdailylifeifatall"],
-                    supp = data["whowouldyouconsidertobewithinyoursupportnetworkex.aparentafriendasiblingetc"],
-                    safe = data["whatwouldmakeyoufeelsaferandmoresupportedagainstraciallymotivateddiscriminationinyourcommunity"],
-                    story = data["whatsyourstorywhatmessagewouldyouliketosharewithothersintheasianamericancommunityatthistimeex.amessageapagewebsiteorprojecttoinspireandempowerotherasianamericans."],
-                    place = data["wherewereyoulivingwhenyouwereexperiencingtheseemotionsduringcovid-19"],
-                    eth = data["whichethniccategorydoyoumostidentifywith"],
-                    misc = data["isthereanythingelseyouwouldliketoshare"],
-                )
+        
+        // content = generatePost(
+        //             id = data["doyouself-identifyasasianamerican"],
+        //             prior = data["pleasedescribehowyourraceethnicityhasinfluencedyourleveloffearofmistreatmentpriortothecovid-19pandemicaswellasafter.havethesefeelingschangedandhowso"],
+        //             fear = data["howdoesyourleveloffearregardinghatecrimesaffecthowyouconductyourdailylifeifatall"],
+        //             supp = data["whowouldyouconsidertobewithinyoursupportnetworkex.aparentafriendasiblingetc"],
+        //             safe = data["whatwouldmakeyoufeelsaferandmoresupportedagainstraciallymotivateddiscriminationinyourcommunity"],
+        //             story = data["whatsyourstorywhatmessagewouldyouliketosharewithothersintheasianamericancommunityatthistimeex.amessageapagewebsiteorprojecttoinspireandempowerotherasianamericans."],
+        //             place = data["wherewereyoulivingwhenyouwereexperiencingtheseemotionsduringcovid-19"],
+        //             eth = data["whichethniccategorydoyoumostidentifywith"],
+        //             misc = data["isthereanythingelseyouwouldliketoshare"]
+        //         )
+        content = generatePost(populateContent(data))
         var popup = L.popup(
             {
                 maxHeight: 500
@@ -128,12 +153,27 @@ function addMarker(data){
             .openOn(myMap);
         var marker = L.marker([data.lat,data.lng])
         markers.push(marker)
-        marker.addTo(myMap).bindPopup(popup)
         
-
+        marker.addTo(myMap).bindPopup(popup).on('click', function(e){changeDesc(populateContent(data))});
+        // z.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>Speak English fluently</h2>`))
+        
+        
+        
         //createButtons(data.lat,data.lng,data["wherewereyoulivingwhenyouwereexperiencingtheseemotionsduringcovid-19"])
-        createStories(data.lat, data.lng, data["whatsyourstorywhatmessagewouldyouliketosharewithothersintheasianamericancommunityatthistimeex.amessageapagewebsiteorprojecttoinspireandempowerotherasianamericans."])
+
         return data.location   
+}
+
+function changeDesc(obj){
+  console.log("AHHH")
+  document.getElementById("title").innerHTML=obj.eth;
+  document.getElementById("authors").innerHTML="\"" + obj.prior + "\"";
+  document.getElementById("affect").innerHTML="\"" + obj.fear + "\"";
+  document.getElementById("supp").innerHTML="\"" + obj.supp + "\"";
+  document.getElementById("safe").innerHTML="\"" + obj.safe + "\"";
+  document.getElementById("story").innerHTML="\"" + obj.story + "\"";
+  document.getElementById("place").innerHTML="\"" + obj.place + "\"";
+  document.getElementById("misc").innerHTML="\"" + obj.misc + "\"";
 }
 function processData(theData){
     const formattedData = [] /* this array will eventually be populated with the contents of the spreadsheet's rows */
@@ -155,9 +195,7 @@ function processData(theData){
     // we can actually add functions here too
     formattedData.forEach(addMarker)
     
-    L.control.layers(null,layers).addTo(myMap)
-   
-    myMap.fitBounds(allLayers.getBounds());
+    z.addTo(myMap)
 }
 function getData(theData){
     const formattedData = [] /* this array will eventually be populated with the contents of the spreadsheet's rows */
@@ -189,10 +227,11 @@ function createButtons2(lat,lng,title){
     newButton.setAttribute("lat",lat); // sets the latitude 
     newButton.setAttribute("lng",lng); // sets the longitude 
     newButton.addEventListener('click', function(){
-        getRandomStory(); //this is the flyTo from Leaflet but using "myMap" as the target
+        changeDesc("ahhh")
     })
     document.body.appendChild(newButton); //this adds the button to our page.
 }
+createButtons2(0, 0, "ahhh")
 function createLinkButton() {
     const newButton = document.createElement("input");
     newButton.type = "button"
@@ -217,16 +256,23 @@ function createButtons(lat,lng,title){
     newButton.setAttribute("lat",lat); // sets the latitude 
     newButton.setAttribute("lng",lng); // sets the longitude 
     newButton.addEventListener('click', function(){
-        myMap.flyTo([lat,lng], zoom = 10); //this is the flyTo from Leaflet
-        myMap.openPopup([lat, lng])
+        changeDesc()
     })
     const spaceForButtons = document.getElementById('contents')
     spaceForButtons.appendChild(newButton);//this adds the button to our page.
 }
+function renderPost(postHTML){
+  const title = document.createElement("h4")
+  title.id = "postTitle"
+  title.innerHTML = "aaaaa";
+  const spaceForButtons = document.getElementById('upper')
+  spaceForButtons.appendChild(title);//this adds the button to our page.
+}
+
 function createStories(lat,lng,title){
     const newButton = document.createElement("h4"); // adds a new button
     newButton.id = "buttonsmenu"; // gives the button a unique id
-    newButton.innerHTML = title; // gives the button a title
+    newButton.innerHTML = (title != "") ? "\"" + title + "\"" : title; // gives the button a title
     const spaceForButtons = document.getElementById('contents')
     spaceForButtons.appendChild(newButton);//this adds the button to our page.
 }
@@ -234,3 +280,34 @@ console.log(markers[1])
 for(var i = 0; i < markers.length; i++) {
     console.log(markers[i])
 }
+
+let z = L.markerClusterGroup();
+
+z.addTo(myMap)
+
+// define layers
+let layers = {
+	"Speaks English": z
+}
+
+// add layer control box
+L.control.layers(null,layers).addTo(myMap)
+
+// make the map zoom to the extent of markers
+
+let allLayers = L.featureGroup([z]);
+myMap.fitBounds(allLayers.getBounds());   
+document.getElementById("title").value="Close Curtain";
+
+document.getElementById('authors').innerHTML
+                = 'A computer science portal for geeks';
+
+function renderDesc(){
+  const desc = document.createElement("h4"); // adds a new button
+  desc.id = "desc"; // gives the button a unique id
+  desc.innerHTML = "PAIN AHHHHHHHHHHHHHHHHHHHHHHHH"; // gives the button a title
+  const spaceForButtons = document.getElementById('test')
+  spaceForButtons.innerHTML = "PAIN"
+}
+
+renderDesc()

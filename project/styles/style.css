@@ -8,6 +8,12 @@
             "d d d"
             "e e e";
 }
+h1{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
 #lower{
     display:grid;
     grid-template-columns: fit-content(8ch) fit-content(8ch) 1fr; /* this creates an even two column layout*/
@@ -18,7 +24,6 @@
 }
 #authors {
     color: rgb(0, 0, 0);
-    padding-top: 50px;
 }
 #title {
    
@@ -30,7 +35,8 @@
     padding-bottom: 50px;
 }
 #second {
-    /* background-color: rgb(248, 242, 191); */
+    background-color: rgb(248, 242, 191);
+    border: black 10px;
 }
 #third {
     /* background-color: rgb(248, 242, 191); */
@@ -49,7 +55,7 @@ h4 {
 }
 #mapArea{
     height:100vh;
-    width:150vh;
+    width:120vh;
     grid-area: b;
     border:2px solid black;
     z-index: 1;
@@ -163,6 +169,7 @@ h4 {
     grid-area: d;
     display:grid;
     grid-template-columns: repeat(2, 1fr);
+    background-color: rgba(183, 238, 111, 0.082);
 }
 #contents h4 {
     padding-left: 20px;
