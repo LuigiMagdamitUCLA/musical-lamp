@@ -22,6 +22,9 @@
 - Google Forms
 - Google Sheets
 - Javascript
+- Leaflet
+- MarkerCluster Plugin
+
 ## File Structure
 -The root folder holds the index.html. The sub-folders “js” and “styles” hold the logic and the styling of the website respectively
 
