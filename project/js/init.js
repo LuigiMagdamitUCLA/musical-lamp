@@ -5,9 +5,10 @@ let Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/r
 });
 Esri_WorldGrayCanvas.addTo(myMap);
 let url = "https://spreadsheets.google.com/feeds/list/1ZH2-pBKLWZEDFkV90ECcUX5HMw4P-8vpKjDxNs3wnMc/okrozsk/public/values?alt=json"
-var markers = []
 
 // INIT VARIABELS HERE================================================
+
+var markers = L.markerClusterGroup();
 
 var obj;
 fetch(url)
@@ -152,11 +153,13 @@ function addMarker(data){
             .setContent(content)
             .openOn(myMap);
         var marker = L.marker([data.lat,data.lng])
-        markers.push(marker)
+        //var marker = L.circleMarker([data.lat,data.lng],circleOptions)
         
-        marker.addTo(myMap).bindPopup(popup).on('click', function(e){changeDesc(populateContent(data))});
-        // z.addLayer(L.circleMarker([data.lat,data.lng],circleOptions).bindPopup(`<h2>Speak English fluently</h2>`))
-        
+        //marker.addTo(myMap).bindPopup(popup).on('click', function(e){changeDesc(populateContent(data))});
+        m = marker.bindPopup(popup).on('click', function(e){changeDesc(populateContent(data))});
+        //m.addTo(myMap)
+        markers.addLayer(m);
+        //z.addLayer(marker.addTo(myMap).bindPopup(popup).on('click', function(e){changeDesc(populateContent(data))})
         
         
         //createButtons(data.lat,data.lng,data["wherewereyoulivingwhenyouwereexperiencingtheseemotionsduringcovid-19"])
@@ -166,14 +169,14 @@ function addMarker(data){
 
 function changeDesc(obj){
   console.log("AHHH")
-  document.getElementById("title").innerHTML=obj.eth;
-  document.getElementById("authors").innerHTML="\"" + obj.prior + "\"";
-  document.getElementById("affect").innerHTML="\"" + obj.fear + "\"";
-  document.getElementById("supp").innerHTML="\"" + obj.supp + "\"";
-  document.getElementById("safe").innerHTML="\"" + obj.safe + "\"";
-  document.getElementById("story").innerHTML="\"" + obj.story + "\"";
-  document.getElementById("place").innerHTML="\"" + obj.place + "\"";
-  document.getElementById("misc").innerHTML="\"" + obj.misc + "\"";
+  document.getElementById("title").innerHTML=(obj.eth != "") ? (obj.eth) : "No response was provided";
+  document.getElementById("authors").innerHTML=(obj.prior != "") ? ("\"" + obj.prior + "\"") : "No response was provided.";
+  document.getElementById("affect").innerHTML=(obj.fear != "") ? ("\"" + obj.fear + "\"") : "No response was provided.";
+  document.getElementById("supp").innerHTML=(obj.supp != "") ? ("\"" + obj.supp + "\"") : "No response was provided."
+  document.getElementById("safe").innerHTML=(obj.safe != "") ? ("\"" + obj.safe + "\"") : "No response was provided."
+  document.getElementById("story").innerHTML=(obj.story != "") ? ("\"" + obj.story + "\"") : "No response was provided."
+  document.getElementById("place").innerHTML=(obj.place != "") ? ("\"" + obj.place + "\"") : "No response was provided."
+  document.getElementById("misc").innerHTML=(obj.misc != "") ? ("\"" + obj.misc + "\"") : "No response was provided."
 }
 function processData(theData){
     const formattedData = [] /* this array will eventually be populated with the contents of the spreadsheet's rows */
@@ -194,8 +197,8 @@ function processData(theData){
 
     // we can actually add functions here too
     formattedData.forEach(addMarker)
-    
-    z.addTo(myMap)
+    myMap.addLayer(markers);
+    //z.addTo(myMap)
 }
 function getData(theData){
     const formattedData = [] /* this array will eventually be populated with the contents of the spreadsheet's rows */
@@ -276,32 +279,6 @@ function createStories(lat,lng,title){
     const spaceForButtons = document.getElementById('contents')
     spaceForButtons.appendChild(newButton);//this adds the button to our page.
 }
-console.log(markers[1])
-for(var i = 0; i < markers.length; i++) {
-    console.log(markers[i])
-}
-
-let z = L.markerClusterGroup();
-
-z.addTo(myMap)
-
-// define layers
-let layers = {
-	"Speaks English": z
-}
-
-// add layer control box
-L.control.layers(null,layers).addTo(myMap)
-
-// make the map zoom to the extent of markers
-
-let allLayers = L.featureGroup([z]);
-myMap.fitBounds(allLayers.getBounds());   
-document.getElementById("title").value="Close Curtain";
-
-document.getElementById('authors').innerHTML
-                = 'A computer science portal for geeks';
-
 function renderDesc(){
   const desc = document.createElement("h4"); // adds a new button
   desc.id = "desc"; // gives the button a unique id
@@ -310,4 +287,7 @@ function renderDesc(){
   spaceForButtons.innerHTML = "PAIN"
 }
 
-renderDesc()
+
+
+console.log(markers)
+console.log("markers")
