@@ -27,15 +27,20 @@
 
 ## How it can be repurposed
 -This project will be sent/handed off to various clubs at UCLA that are relevant to the project at hand; for example, those that are APC-associated. The survey is currently already send to KASA, Hawaii Club, and APC 2020-2021 staff, and as school starts up in fall quarter and clubs are more active, we hope to send our website and connect to more organizations.
+
 -The information on this website can be used as a source of support, a way to find different resources, and share stories with other Bruins. Perhaps if some shared messages and links gain traction, they will allow more students to learn about resources not ordinarily brought to light.
+
 -Learning more about Bruin stories can also help the general student population increase understanding of the experiences of certain marginalized groups at UCLA, whereby before they would not have heard these stories. For example, this survey is centered around the experiences of Asian American students, and within that group there are many other minority groups that can learn from and about each other.
 
 ## Screenshots and Features
 -When you open the webpage, the user is able to see a brief description of the purpose of the webpage, and they are informed about the survey and opportunity to share their own marker on the map.
 ![Example screenshot](./img/screenshot1.png)
+
 -This webpage clearly displays the project objective at the forefront right underneath the title, and it also describes what each marker represents/the community response for clarity. As you click on each marker, survey responses are displayed clearly to the side for ease of reading.
 ![Example screenshot](./img/screenshot2.png)
+
 -There are also links to take the survey, to the Asian American Studies Center where students can access even more links to resources and research, and to APC displayed on the webpage, where students can learn more about student-specific events and news with associated organizations.
+
 -The website also offers language translation for ease of use.
 -The link that says “Click here to take the survey” leads you to the google form where you can fill out answers to add a marker to the map.
 ![Example screenshot](./img/screenshot3.png)
@@ -48,7 +53,9 @@
 
 ## Acknowledgements
 -Thanks to Albert, who supervised our project
+
 -Thanks to the survey takers
+
 -Thanks to all involved with helping out with survey data!
 
 
