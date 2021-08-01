@@ -43,7 +43,7 @@
 
 -The website also offers language translation for ease of use.
 -The link that says “Click here to take the survey” leads you to the google form where you can fill out answers to add a marker to the map.
-![Example screenshot](./Screenshot 13.png)
+![Example screenshot](./"Screenshot 13.png")
 
 
 <!-- If you have screenshots you'd like to share, include them here. -->
